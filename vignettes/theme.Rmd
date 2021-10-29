@@ -1,0 +1,71 @@
+---
+title: "theme"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{theme}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(nottshcMethods)
+
+# create data
+
+df <- data.frame(
+  religion = c("Christian", "Buddhist", "Hindu", "Jewish", "Muslim", "Sikh",
+  "Other Religion", "No Religion", "Not Stated"),
+  count = c(143639, 768, 2271, 2413, 12994, 1652, 566, 47968, 14307)
+)
+
+# create a ggplot object
+plot <- df %>%
+  dplyr::arrange(count) %>%
+  dplyr::mutate(religion = factor(religion,
+                                  levels = religion)) %>%
+  ggplot2::ggplot(ggplot2::aes(religion, count)) +
+  ggplot2::geom_col(fill = "#fc6721",
+                    alpha = 0.8,
+                    show.legend = FALSE) +
+  ggplot2::coord_flip() +
+  ggplot2::labs(x = NULL, y = "Residents",
+                title = "This is the title of the chart",
+                subtitle = "This is the subtitle",
+                caption = "Source: Table KS209EW, Census 2011  |  @DataScienceNott")
+
+```
+
+# Theme 1 
+
+Add the `theme_nottshc()` with a box drawn around the chart
+
+```{r}
+plot + theme_nottshc(base_size = 12, box = TRUE)
+
+```
+
+# Theme 2
+
+No parameters are required for ds_theme, the subtitle and source are in grey and all background lines are removed.
+
+```{r}
+plot + ds_theme()
+
+```
+
+# Convert a ggplot to plotly
+
+
+```{r}
+ggplotly_nottshc(plot, ytitle = "Y title", display_mode_bar = TRUE)
+```
+
+
+
