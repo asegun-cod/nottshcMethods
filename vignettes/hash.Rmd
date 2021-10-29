@@ -1,0 +1,35 @@
+---
+title: "hash"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{hash}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+
+```{r setup}
+library(nottshcMethods)
+
+df <- data.frame(
+  religion = c("Christian", "Buddhist", "Hindu", "Jewish", "Muslim", "Sikh",
+  "Other Religion", "No Religion", "Not Stated", "Missing"),
+  count = c(143639, 768, 2271, 2413, 12994, 1652, 566, 47968, 14307, NA)
+)
+
+df
+
+```
+
+```{r}
+
+hash(df)
+```
+
